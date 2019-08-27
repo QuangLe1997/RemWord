@@ -1,0 +1,83 @@
+{% extends 'music/base.html' %}
+{% block title %}Add a New Word{% endblock %}
+{% block topics_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <!-- Left Album Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{% url 'music:detail' topic.id %}">
+                        {% if topic.topic_logo %}
+                        <img src="{{ topic.topic_logo.url }}" class="img-responsive">
+                        {% else %}
+                        <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Song Info -->
+        <div class="col-sm-8 col-md-9">
+            <ul class="nav nav-pills" style="margin-bottom: 20px;">
+                <li role="presentation"><a href="{% url 'music:detail' topic.id %}">View All</a></li>
+                <li role="presentation"><a href="{% url 'music:create_vocabulary' topic.id %}">Add New Word</a></li>
+                <li role="presentation" ><a href="{% url 'music:compare_word' topic.id 0%}">EngLish to
+                    VN</a></li>
+                <li role="presentation" class="active"><a href="{% url 'music:compare_word' topic.id 1%}">VN to English</a></li>
+                <li role="presentation"><a href="{% url 'music:create_vocabulary' topic.id %}">Story to VN</a></li>
+                <li role="presentation"><a href="{% url 'music:create_vocabulary' topic.id %}">Story to English</a></li>
+            </ul>
+            <div class="panel panel-default" style="margin: 0 auto;">
+                <div class="panel-body ">
+                    <h3>Predict Vocabulary</h3>
+                    {% if new_word %}
+                    <span style="margin-left: auto;margin-right: auto;"><font size="9">{{new_word.mean}}</font></span>
+                    <form class="form-horizontal" role="form" action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="text" name="predict_txt">
+                        <input type="hidden" name="vocabulary" value="{{new_word.id}}">
+                        <button id="submitword" type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                    {% endif %}
+                {% if error_message %}
+                <div style="margin: auto;">
+                    <span role="presentation"><a href="{% url 'music:compare_word' topic.id 1%}"><font size="5" color="#1a75ff">
+                        {{link.mean}}</font></a></span>
+                </div>
+                {% if result %}
+                <div class="alert" style="background-color:#00994d;">
+                    <strong>{{error_message}}!</strong>
+                    <p class=" btn btn-success" style="margin-left: auto;margin-right: auto;"><a
+                            href="{% url 'music:compare_word' topic.id 1%}">OK</a></p>
+                </div>
+                <script>
+                 document.getElementById("submitword").disabled = true;
+                </script>
+                {% else %}
+                <div class="alert col-sm-2 col-md-3">
+                    <!--<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>-->
+                    <strong style=""><font size="9">{{error_message}}</font></strong> what a pity !!!
+                    <p class=" btn btn-success" style="margin: auto;"><a
+                            href="{% url 'music:compare_word' topic.id 1%}">OK</a></p>
+                </div>
+                <script>
+                  document.getElementById("submitword").disabled = true;
+                </script>
+                {% endif %}
+                {% endif %}
+            </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+

@@ -1,0 +1,78 @@
+{% extends 'music/base.html' %}
+{% block title %}All Vocabularys{% endblock %}
+{% block vocabularys_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid vocabularys-container">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" {% if filter_by == 'all' %}class="active"{% endif %}><a href="{% url 'music:vocabularys' 'all' %}">View All</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Vocabulary Title</th>
+                                    <th>Type</th>
+
+                                    <th>Story</th>
+                                    <th>Mean</th>
+                                    <th>Rating</th>
+                                    <th>Topic</th>
+                                    <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for vocabulary in vocabulary_list %}
+                                <tr>
+                                    <td>{{ vocabulary.vocabulary_title }}</td>
+                                    <td>{{ vocabulary.type }}</td>
+                                    <td>{{ vocabulary.story }}</td>
+                                    <td>{{ vocabulary.mean }}</td>
+                                    <td>{{ vocabulary.rating }}</td>
+                                    <td>
+                                        <a href="{% url 'music:detail' vocabulary.topic.id %}">
+                                            <img src="{{ vocabulary.topic.topic_logo.url }}" class="img-responsive" style="width: 20px; float: left; margin-right: 10px;" />
+                                        </a>
+                                        <a href="{% url 'music:detail' vocabulary.topic.id %}">{{ vocabulary.topic.topic_title }}</a>
+                                    </td>
+                                    <td>
+                                        <form action="{% url 'music:delete_vocabulary' vocabulary.topic.id vocabulary.id 1%}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="vocabulary_id" value="{{ vocabulary.id }}" />
+                                        <button type="submit" class="btn btn-primary btn-xs">
+                                            <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp; Save
+                                        </button>
+                                        </form>
+                                        <form action="{% url 'music:delete_vocabulary' vocabulary.topic.id vocabulary.id 1 %}" method="post" style="display: inline;">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="vocabulary_id" value="{{ vocabulary.id }}" />
+                                            <button type="submit" class="btn btn-danger btn-xs">
+                                                <span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
+                                            </button>
+                                        </form>
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
