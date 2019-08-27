@@ -39,21 +39,9 @@ var VocabularysListPage = {
 
 	},
 
-//	bindEvents: function() {
-//		$('.btn-favorite', this.$container).on('click', function(e) {
-//			e.preventDefault();
-//
-//			var self = $(this);
-//			var url = $(this).attr('href');
-//			$.getJSON(url, function(result) {
-//				if (result.success) {
-//					$('.glyphicon-star', self).toggleClass('active');
-//				}
-//			});
-//
-//			return false;
-//		});
-//	}
+function myShow() {
+  var x = document.getElementById("modal-wrapper");
+  x.style.display === "block";
 };
 
 $(document).ready(function() {

@@ -29,12 +29,15 @@ ul.errorlist > li {
 
 
 .alert {
-  weight:50px
-  height:30px
-  margin-left: 30px;
-  padding: 10px;
-  background-color: #ff1a1a;
-  color: white;
+width: 100%;
+padding: 15px 20px;
+margin: 8px 5px;
+display: inline-block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+font-size:20px;
+background-color: #ff1a1a;
+color: white;
 }
 
 .closebtn {

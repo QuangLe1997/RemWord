@@ -1,10 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'music/base.html' %}
+{% block title %}Add a New Word{% endblock %}
+{% block topics_active %}active{% endblock %}
 
-</body>
-</html>
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <!-- Left Album Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{% url 'music:detail' topic.id %}">
+                        {% if topic.topic_logo %}
+                        <img src="{{ topic.topic_logo.url }}" class="img-responsive">
+                        {% else %}
+                        <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Song Info -->
+        <div class="col-sm-8 col-md-9">
+            <ul class="nav nav-pills" style="margin-bottom: 20px;">
+                <li role="presentation"><a href="{% url 'music:detail' topic.id %}">View All</a></li>
+                <li role="presentation"><a href="{% url 'music:create_vocabulary' topic.id %}">Add New Word</a></li>
+                <li role="presentation" ><a href="{% url 'music:compare_word' topic.id 0%}">EngLish to
+                    VN</a></li>
+                <li role="presentation" ><a href="{% url 'music:compare_word' topic.id 1%}">VN to English</a></li>
+                <li role="presentation" class="active"><a href="{% url 'music:compare_word' topic.id 2%}">Story to VN</a></li>
+                <li role="presentation"><a href="{% url 'music:compare_word' topic.id 3%}">Story to English</a></li>
+            </ul>
+            <!--TEST POP UP-->
+            <div id="modal-wrapper" class="modal">
+                <form class="modal-content animate">
+                    <div class="imgcontainer">
+                    <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close
+                          PopUp">&times;</span>
+                        <img src="{{link.note}}" alt="Avatar" class="avatar">
+                        <h1 style="text-align:center">{{link.vocabulary_title}}</h1>
+                    </div>
+                    <div class="w3-container" style="text-align:center">
+                        <h2><font size="10" color="#1c911a">{{link.mean}}</font></h2>
+                        <span><font size="5" color="#4542f5">{{link.story}}</font></span><br>
+                        example:<br>
+                        {% for example in link.example_set.all %}
+                        <span><font size="4" color="#ed6707">{{ example.example_txt }}</font></span>
+                        <br>
+                        {% endfor %}
+                        <form action="/action_page.php">
+                            <input type="text" name="Example" placeholder="New example">
+                            <br>
+                            <button type="submit" class="button_1">ADD new</button>
+
+                        </form>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!--VIEW-->
+            <div class="panel panel-default">
+                <div class="panel-body " style="text-align:center">
+                    {% if new_word %}
+                    <span style="text-align:center"><font size="9">{{new_word.story}}</font></span>
+                    <form class="form-horizontal" role="form" action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input class="input_predict" name="predict_txt">
+                        <input type="hidden" name="vocabulary" value="{{new_word.id}}">
+                        <button id="submitword" type="submit" class="button_1">Submit</button>
+                    </form>
+                    {% endif %}
+                    {% if error_message %}
+                    <div style="margin: auto;">
+                    <span role="presentation"><font size="8" color="#1a75ff">{{link.vocabulary_title}}</font></span>
+                    </div>
+                    {% if result %}
+                    <div class="alert" style="background-color:#00994d;">
+                        <strong>{{error_message}}!</strong>
+                        <br>
+                        <button class="button_2"
+                                onclick="document.getElementById('modal-wrapper').style.display='block'">
+                            Revise
+                        </button>
+                        <button class="button_2"
+                                onclick="window.location.href='{% url 'music:compare_word' topic.id 2%}'">
+                            Continues
+                        </button>
+                    </div>
+                    <script>
+                 document.getElementById("submitword").disabled = true;
+
+                    </script>
+                    {% else %}
+                    <div class="alert">
+                        <strong style=""><font size="8">{{error_message}}</font></strong> what a pity !!!
+                        <br>
+                        <button class="button_2"
+                                onclick="document.getElementById('modal-wrapper').style.display='block'">
+                            Revise
+                        </button>
+                        <button class="button_2"
+                                onclick="window.location.href='{% url 'music:compare_word' topic.id 2%}'">
+                            Continues
+                        </button>
+                    </div>
+                    <script>
+                  document.getElementById("submitword").disabled = true;
+
+                    </script>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+

@@ -1,4 +1,5 @@
 import random
+
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.db.models import Q
@@ -206,7 +207,7 @@ def compare_vocabualry(request, topic_id, type_compare):
             predict = form.save(commit=False)
             predict.user = request.user
             ran_old = form.cleaned_data['vocabulary']
-            if type_compare == 0:
+            if type_compare % 2 == 0:
                 compare = ran_old.mean
             else:
                 compare = ran_old.vocabulary_title
@@ -246,4 +247,8 @@ def compare_vocabualry(request, topic_id, type_compare):
 
 
 def update_voca():
+    pass
+
+
+def add_example():
     pass
