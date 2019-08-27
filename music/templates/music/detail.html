@@ -5,15 +5,14 @@
 {% block body %}
 <div class="container-fluid vocabularys-container">
 
-    <div class="row">
-
-        <!-- Left Album Info -->
-        <div class="col-sm-4 col-md-3">
+    <div class="container-fluid">
+        <div class="col-sm-12 col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <h1 style="text-align:center"><font size="10" color="green">{{topic.topic_title}}</font></h1>
                     <a href="{% url 'music:detail' topic.id %}">
                         {% if topic.topic_logo %}
-                            <img src="{{ topic.topic_logo.url }}" class="img-responsive">
+                            <img src="{{ topic.topic_logo.url }}" class="img-responsive" style="width:500px;margin:0 200px;" >
                         {% else %}
                             <h3>No image to display</h3>
                         {% endif %}
@@ -23,9 +22,9 @@
         </div>
 
         <!-- Right Vocabulary Info -->
-        <div class="col-sm-8 col-md-9">
+        <div class="col-sm-12 col-md-12">
 
-            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+            <ul class="nav nav-pills" style="margin-bottom: 10px;font-size: 2em;">
                 <li role="presentation" class="active"><a href="{% url 'music:detail' topic.id %}">View All</a></li>
                 <li role="presentation"><a href="{% url 'music:create_vocabulary' topic.id %}">Add New Word</a></li>
                 <li role="presentation"><a href="{% url 'music:compare_word' topic.id 0%}">EngLish to VN</a></li>

@@ -73,10 +73,11 @@ background-color: rgba(0,0,0,0.4);
 /* Modal Content Box */
 .modal-content {
 background-color: #fefefe;
-margin: 10% auto 20% auto;
+font-size: 3em;
+margin: 20% auto 25% auto;
 border: 3px solid #888;
-width: 75%;
-padding-bottom: 40px;
+width: 70%;
+padding-bottom: 4px;
 }
 
 /* The Close Button (x) */

@@ -5,35 +5,34 @@
 {% block body %}
 <div class="container-fluid">
 
-    <div class="row">
-
-        <!-- Left Album Info -->
-        <div class="col-sm-4 col-md-3">
+    <div class="container-fluid">
+        <div class="col-sm-12 col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <h1 style="text-align:center"><font size="10" color="green">{{topic.topic_title}}</font></h1>
                     <a href="{% url 'music:detail' topic.id %}">
                         {% if topic.topic_logo %}
-                        <img src="{{ topic.topic_logo.url }}" class="img-responsive">
+                            <img src="{{ topic.topic_logo.url }}" class="img-responsive" style="width:500px;margin:0 200px;" >
                         {% else %}
-                        <h3>No image to display</h3>
+                            <h3>No image to display</h3>
                         {% endif %}
                     </a>
-
                 </div>
             </div>
         </div>
 
         <!-- Right Song Info -->
-        <div class="col-sm-8 col-md-9">
-            <ul class="nav nav-pills" style="margin-bottom: 20px;">
+        <div class="col-sm-12 col-md-12">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;font-size: 2em;">
                 <li role="presentation"><a href="{% url 'music:detail' topic.id %}">View All</a></li>
                 <li role="presentation"><a href="{% url 'music:create_vocabulary' topic.id %}">Add New Word</a></li>
-                <li role="presentation" class="active"><a href="{% url 'music:compare_word' topic.id 0%}">EngLish to
-                    VN</a></li>
-                <li role="presentation"><a href="{% url 'music:compare_word' topic.id 1%}">VN to English</a></li>
-                <li role="presentation"><a href="{% url 'music:compare_word' topic.id 1%}">Story to VN</a></li>
-                <li role="presentation"><a href="{% url 'music:compare_word' topic.id 1%}">Story to English</a></li>
+                <li role="presentation" class="active"><a href="{% url 'music:compare_word' topic.id 0%}">EngLish to VN</a></li>
+                <li role="presentation" ><a href="{% url 'music:compare_word' topic.id 1%}">VN to English</a></li>
+                <li role="presentation"><a href="{% url 'music:create_vocabulary' topic.id %}">Story to VN</a></li>
+                <li role="presentation"><a href="{% url 'music:create_vocabulary' topic.id %}">Story to English</a></li>
             </ul>
+
             <!--TEST POP UP-->
             <div id="modal-wrapper" class="modal">
                 <form class="modal-content animate">
@@ -41,18 +40,18 @@
                     <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close
                           PopUp">&times;</span>
                         <img src="{{link.note}}" alt="Avatar" class="avatar">
-                        <h1 style="text-align:center">{{link.vocabulary_title}}</h1>
+                        <h1 style="text-align:center;"><font size="20" color="#1c011a">{{link.vocabulary_title}}</font></h1>
                     </div>
                     <div class="w3-container" style="text-align:center">
                         <h2><font size="10" color="#1c911a">{{link.mean}}</font></h2>
-                        <span><font size="5" color="#4542f5">{{link.story}}</font></span><br>
+                        <span><font size="7" color="#4542f5">{{link.story}}</font></span><br>
                         example:<br>
                         {% for example in link.example_set.all %}
-                        <span><font size="4" color="#ed6707">{{ example.example_txt }}</font></span>
+                        <span><font size="6" color="#ed6707">{{ example.example_txt }}</font></span>
                         <br>
                         {% endfor %}
                         <form action="/action_page.php">
-                            <input type="text" name="Example" placeholder="New example">
+                            <input class="predict_txt" name="Example" placeholder="New example" style="width:50%">
                             <br>
                             <button type="submit" class="button_1">ADD new</button>
 
@@ -68,10 +67,10 @@
             <div class="panel panel-default">
                 <div class="panel-body " style="text-align:center">
                     {% if new_word %}
-                    <span style="text-align:center"><font size="9">{{new_word.vocabulary_title}}</font></span>
+                    <span style="text-align:center;"><font size="10">{{new_word.vocabulary_title}}</font></span>
                     <form class="form-horizontal" role="form" action="" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input class="input_predict" name="predict_txt">
+                        <input class="input_predict" name="predict_txt" style="font-size: 2em;">
                         <input type="hidden" name="vocabulary" value="{{new_word.id}}">
                         <button id="submitword" type="submit" class="button_1">Submit</button>
                     </form>
@@ -100,7 +99,7 @@
                     </script>
                     {% else %}
                     <div class="alert">
-                        <strong style=""><font size="8">{{error_message}}</font></strong> what a pity !!!
+                        <strong ><font size="10">{{error_message}}</font></strong> what a pity !!!
                         <br>
                         <button class="button_2"
                                 onclick="document.getElementById('modal-wrapper').style.display='block'">
