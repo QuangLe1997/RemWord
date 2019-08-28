@@ -9,23 +9,6 @@ var TopicsListPage = {
 	render: function() {
 
 	},
-
-
-//	bindEvents: function() {
-//		$('.btn-favorite', this.$container).on('click', function(e) {
-//			e.preventDefault();
-//
-//			var self = $(this);
-//			var url = $(this).attr('href');
-//			$.getJSON(url, function(result) {
-//				if (result.success) {
-//					$('.glyphicon-star', self).toggleClass('active');
-//				}
-//			});
-//
-//			return false;
-//		});
-//	}
 };
 
 var VocabularysListPage = {
@@ -38,6 +21,7 @@ var VocabularysListPage = {
 	render: function() {
 
 	},
+	};
 
 function myShow() {
   var x = document.getElementById("modal-wrapper");
@@ -48,6 +32,13 @@ $(document).ready(function() {
 	TopicsListPage.init();
 	VocabularysListPage.init();
 });
+
+//document.addEventListener('DOMContentLoaded', function() {
+//    var elems = document.querySelectorAll('.fixed-action-btn');
+//    var instances = M.FloatingActionButton.init(elems, {
+//      direction: 'left'
+//    });
+//  });
 
 
 

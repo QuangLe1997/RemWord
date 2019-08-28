@@ -8,15 +8,8 @@
     <div class="container-fluid">
         <div class="col-sm-12 col-md-12">
             <div class="panel panel-default">
-                <div class="panel-body">
-                    <h1 style="text-align:center"><font size="10" color="green">{{topic.topic_title}}</font></h1>
-                    <a href="{% url 'music:detail' topic.id %}">
-                        {% if topic.topic_logo %}
-                            <img src="{{ topic.topic_logo.url }}" class="img-responsive" style="width:500px;margin:0 200px;" >
-                        {% else %}
-                            <h3>No image to display</h3>
-                        {% endif %}
-                    </a>
+                <div class="panel-body" style="text-align:center;" >
+             <strong style="font-size: 2em;color:#002ba1;">{{topic.topic_title}}</strong>
                 </div>
             </div>
         </div>
@@ -24,13 +17,12 @@
         <!-- Right Song Info -->
         <div class="col-sm-12 col-md-12">
 
-            <ul class="nav nav-pills" style="margin-bottom: 10px;font-size: 2em;">
+            <ul class="nav nav-pills" style="margin-bottom: 15px;font-size: 2.5em;">
                 <li role="presentation"><a href="{% url 'music:detail' topic.id %}">View All</a></li>
                 <li role="presentation"><a href="{% url 'music:create_vocabulary' topic.id %}">Add New Word</a></li>
                 <li role="presentation" ><a href="{% url 'music:compare_word' topic.id 0%}">EngLish to VN</a></li>
                 <li role="presentation" ><a href="{% url 'music:compare_word' topic.id 1%}">VN to English</a></li>
-                <li role="presentation"><a href="{% url 'music:compare_word' topic.id 2%}">Story to English</a></li>
-                <li role="presentation" class="active"><a href="{% url 'music:compare_word' topic.id 3%}">Story to VN</a></li>
+                <li role="presentation" class="active"><a href="{% url 'music:compare_word' topic.id 2%}">Story to English</a></li>
             </ul>
 
             <!--TEST POP UP-->
@@ -39,21 +31,23 @@
                     <div class="imgcontainer">
                     <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close
                           PopUp">&times;</span>
-                        <img src="{{link.note}}" alt="Avatar" class="avatar">
-                        <h1 style="text-align:center;font-size: 2em;"><font size="20" color="#1c011a">{{link.vocabulary_title}}</font></h1>
+                        <img src="https://img.vietwiki.net/uploads/2018/01/trieu-le-dinh-1.jpg" alt="Avatar" class="avatar">
+                        <br>
+                        <strong style="text-align:center;font-size: 2.5em;color:#1c011a;">{{link.vocabulary_title}}</strong>
+                        <br>
                     </div>
                     <div class="w3-container" style="text-align:center">
-                        <h2 style="font-size: 2em;"><font color="#1c911a">{{link.vocabulary_title}}</font></h2>
-                        <span><font size="7" color="#4542f5">{{link.story}}</font></span><br>
-                        example:<br>
+                        <h2 style="font-size: 2em;"><font color="#1c911a">{{link.mean}}</font></h2>
+                        <span><font size="7" color="#4542f5">{{link.story}}</font></span>
+                        <br>
                         {% for example in link.example_set.all %}
                         <span><font size="6" color="#ed6707">{{ example.example_txt }}</font></span>
                         <br>
                         {% endfor %}
                         <form action="/action_page.php">
-                            <input class="predict_txt" name="Example" placeholder="New example" style="width:50%">
+                            <input class="predict_txt" name="Example" placeholder="New example" style="width:85%;margin-top: 10%;font-size:1em;">
                             <br>
-                            <button type="submit" class="button_1">ADD new</button>
+                            <button type="submit" class="button_1" style="width:85%;margin-top: 5%;font-size:1em;">Add new</button>
 
                         </form>
 
@@ -64,56 +58,55 @@
             </div>
 
             <!--VIEW-->
-            <div class="panel panel-default">
-                <div class="panel-body " style="text-align:center">
+            <div>
+                <div style="text-align:center">
                     {% if new_word %}
-                    <span style="text-align:center;font-size: 2em;">{{new_word.story}}</span>
-                    <form class="form-horizontal" role="form" action="" method="POST" enctype="multipart/form-data">
+                    <strong style="font-size: 5em;">{{new_word.story}}</strong>
+                    <form class="form-horizontal" role="form" action="" method="POST" enctype="multipart/form-data"
+                    style="margin-top:5%;" autocomplete="off">
                         {% csrf_token %}
-                        <input class="input_predict" name="predict_txt" style="font-size: 2em;">
+                        <input class="input_predict" name="predict_txt" style="font-size: 5em;">
                         <input type="hidden" name="vocabulary" value="{{new_word.id}}">
-                        <button id="submitword" type="submit" class="button_1" style="font-size: 2em;">Submit</button>
+                        <button id="submitword" type="submit" class="button_1" style="font-size: 4em;margin-top:3%;">Submit</button>
                     </form>
                     {% endif %}
                     {% if error_message %}
                     <div style="margin: auto;">
-                    <span role="presentation"><font size="8" color="#1a75ff">{{link.vocabulary_title}}</font></span>
-
+                    <strong role="presentation" style="font-size: 4em; color:#1a75ff">{{link.story}}</strong>
                     </div>
                     {% if result %}
-                    <div class="alert" style="background-color:#00994d;">
-                        <strong>{{error_message}}!</strong>
+                    <div class="alert" style="background-color:#00994d;font-size: 2em;">
+                        <strong style="font-size: 2em;">{{error_message}}!</strong>
                         <br>
-                        <button class="button_2"
-                                onclick="document.getElementById('modal-wrapper').style.display='block'">
+                        <button class="button_1"
+                                onclick="document.getElementById('modal-wrapper').style.display='block'"
+                        style="width:40%;margin-top:15%;font-size: 1.3em;background-color: #eb7609;">
                             Revise
                         </button>
-                        <button class="button_2"
-                                onclick="window.location.href='{% url 'music:compare_word' topic.id 2%}'">
+                        <button class="button_1"
+                                onclick="window.location.href='{% url 'music:compare_word' topic.id 2%}'"
+                        style="width:40%;margin-top:15%;font-size: 1.3em;background-color: #eb7609;">
                             Continues
                         </button>
                     </div>
-                    <script>
-                 document.getElementById("submitword").disabled = true;
-
-                    </script>
                     {% else %}
-                    <div class="alert">
-                        <strong style="font-size: 2em;">{{error_message}}</strong> what a pity !!!
+                    <div class="alert" style="background-color:#e00b0b;font-size: 2em;">
+                        <strong style="font-size: 2em;">{{error_message}}</strong>
                         <br>
-                        <button class="button_2"
-                                onclick="document.getElementById('modal-wrapper').style.display='block'" style="font-size: 2em;">
+                        <br>
+                        <strong>What a pity !!!</strong>
+                        <br>
+                        <button class="button_1"
+                                onclick="document.getElementById('modal-wrapper').style.display='block'"
+                        style="width:40%;margin-top:15%;font-size: 1.3em;background-color: #eb7609;">
                             Revise
                         </button>
-                        <button class="button_2"
-                                onclick="window.location.href='{% url 'music:compare_word' topic.id 2%}'" style="font-size: 2em;">
+                        <button class="button_1"
+                                onclick="window.location.href='{% url 'music:compare_word' topic.id 2%}'"
+                        style="width:40%;margin-top:15%;font-size: 1.3em;background-color: #eb7609;">
                             Continues
                         </button>
                     </div>
-                    <script>
-                  document.getElementById("submitword").disabled = true;
-
-                    </script>
                     {% endif %}
                     {% endif %}
                 </div>

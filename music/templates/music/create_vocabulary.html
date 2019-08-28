@@ -8,15 +8,8 @@
     <div class="container-fluid">
         <div class="col-sm-12 col-md-12">
             <div class="panel panel-default">
-                <div class="panel-body">
-                    <h1 style="text-align:center"><font size="10" color="green">{{topic.topic_title}}</font></h1>
-                    <a href="{% url 'music:detail' topic.id %}">
-                        {% if topic.topic_logo %}
-                            <img src="{{ topic.topic_logo.url }}" class="img-responsive" style="width:500px;margin:0 200px;" >
-                        {% else %}
-                            <h3>No image to display</h3>
-                        {% endif %}
-                    </a>
+                <div class="panel-body" style="text-align:center;" >
+             <strong style="font-size: 2em;color:#002ba1;">{{topic.topic_title}}</strong>
                 </div>
             </div>
         </div>
@@ -24,35 +17,35 @@
         <!-- Right Song Info -->
         <div class="col-sm-12 col-md-12">
 
-            <ul class="nav nav-pills" style="margin-bottom: 10px;font-size: 2em;">
+            <ul class="nav nav-pills" style="margin-bottom: 15px;font-size: 2.5em;">
                 <li role="presentation"><a href="{% url 'music:detail' topic.id %}">View All</a></li>
                 <li role="presentation"class="active"><a href="{% url 'music:create_vocabulary' topic.id %}">Add New Word</a></li>
                 <li role="presentation"><a href="{% url 'music:compare_word' topic.id 0%}">EngLish to VN</a></li>
                 <li role="presentation"><a href="{% url 'music:compare_word' topic.id 1%}">VN to English</a></li>
-                <li role="presentation"><a href="{% url 'music:create_vocabulary' topic.id %}">Story to VN</a></li>
-                <li role="presentation"><a href="{% url 'music:create_vocabulary' topic.id %}">Story to English</a></li>
+                <li role="presentation"><a href="{% url 'music:compare_word' topic.id 2%}">Story to English</a></li>
             </ul>
 
-            <div class="panel panel-default">
-                <div class="panel-body" style="text-align:center">
-                    <h3 style="text-align:center;font-size: 2.5em;">Add New Word</h3>
+            <div >
+                <div style="text-align:center">
+                    <strong style="text-align:center;font-size: 6em;color:green;">New Word</strong>
                     {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
                     {% endif %}
-                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data" autocomplete="off"
+                    style=" margin-top:7%;">
                         {% csrf_token %}
-                        <input type="hidden" name="topic" value="{{ topic }}">
+                            <input type="hidden" name="topic" value="{{ topic }}">
                             {% csrf_token %}
-                            <input class="input_predict" name="vocabulary_title" placeholder="vocabulary_title" style="font-size: 2em;">
-                            <select name="type" style="font-size: 1.5em;" class="input_predict">
-                            <option value="1">NOUN</option>
-                            <option value="2">VERB</option>
-                            <option value="3">ADJ</option>
-                            <option value="4">ADV</option>
+                            <input class="input_predict" name="vocabulary_title" placeholder="vocabulary" style="font-size: 5em;">
+                            <select name="type" style="font-size: 5em;" class="input_predict">
+                            <option value="1" style="font-size: 0.5em;">NOUN</option>
+                            <option value="2" style="font-size: 0.5em;">VERB</option>
+                            <option value="3" style="font-size: 0.5em;">ADJ</option>
+                            <option value="4" style="font-size: 0.5em;">ADV</option>
                             </select>
-                            <input class="input_predict" name="story" placeholder="story" style="font-size: 2em";>
-                            <input class="input_predict" name="mean" placeholder="mean"style="font-size: 2em;">
-                            <button id="input_predict" type="submit" class="button_1" style="font-size: 2em;">Submit</button>
+                            <input class="input_predict" name="story" placeholder="story" style="font-size: 5em";>
+                            <input class="input_predict" name="mean" placeholder="mean"style="font-size: 5em;">
+                            <button id="input_predict" type="submit" class="button_1" style="margin-top:7%;font-size: 5em;">Submit</button>
 
                     </form>
                 </div>

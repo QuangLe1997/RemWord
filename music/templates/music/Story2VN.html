@@ -11,13 +11,13 @@
         <div class="col-sm-4 col-md-3">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a href="{% url 'music:detail' topic.id %}">
-                        {% if topic.topic_logo %}
-                        <img src="{{ topic.topic_logo.url }}" class="img-responsive">
-                        {% else %}
-                        <h3>No image to display</h3>
-                        {% endif %}
-                    </a>
+<!--                    <a href="{% url 'music:detail' topic.id %}">-->
+<!--                        {% if topic.topic_logo %}-->
+<!--                        <img src="{{ topic.topic_logo.url }}" class="img-responsive">-->
+<!--                        {% else %}-->
+<!--                        <h3>No image to display</h3>-->
+<!--                        {% endif %}-->
+<!--                    </a>-->
 
                 </div>
             </div>
@@ -25,14 +25,13 @@
 
         <!-- Right Song Info -->
         <div class="col-sm-8 col-md-9">
-            <ul class="nav nav-pills" style="margin-bottom: 20px;">
+            <ul class="nav nav-pills" style="margin-bottom: 15px;font-size: 2.5em;">
                 <li role="presentation"><a href="{% url 'music:detail' topic.id %}">View All</a></li>
                 <li role="presentation"><a href="{% url 'music:create_vocabulary' topic.id %}">Add New Word</a></li>
                 <li role="presentation" ><a href="{% url 'music:compare_word' topic.id 0%}">EngLish to
                     VN</a></li>
                 <li role="presentation" ><a href="{% url 'music:compare_word' topic.id 1%}">VN to English</a></li>
-                <li role="presentation" ><a href="{% url 'music:compare_word' topic.id 2%}">Story to English</a></li>
-                <li role="presentation" class="active"><a href="{% url 'music:compare_word' topic.id %}">Story to VN</a></li>
+                <li role="presentation" class="active"><a href="{% url 'music:compare_word' topic.id 3%}">Story to English</a></li>
             </ul>
             <!--TEST POP UP-->
             <div id="modal-wrapper" class="modal">
@@ -65,8 +64,8 @@
             </div>
 
             <!--VIEW-->
-            <div class="panel panel-default">
-                <div class="panel-body " style="text-align:center">
+            <div >
+                <div style="text-align:center">
                     {% if new_word %}
                     <span style="text-align:center"><font size="9">{{new_word.story}}</font></span>
                     <form class="form-horizontal" role="form" action="" method="POST" enctype="multipart/form-data">
