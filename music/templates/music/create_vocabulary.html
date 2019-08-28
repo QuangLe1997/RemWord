@@ -35,37 +35,25 @@
 
             <div class="panel panel-default">
                 <div class="panel-body" style="text-align:center">
-                    <h3 style="text-align:center">Add a New Word</h3>
+                    <h3 style="text-align:center;font-size: 2.5em;">Add New Word</h3>
                     {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
                     {% endif %}
                     <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="hidden" name="topic" value="{{ topic }}">
-<!--                        {% include 'music/form_template.html' %}-->
-<!--                        <form class="form-horizontal" role="form" action="" method="POST" enctype="multipart/form-data">-->
-<!--                            {% csrf_token %}-->
-                            <input class="input_predict" name="vocabulary_title" placeholder="vocabulary_title" style="font-size: 1em;">
-<!--                            <input class="input_predict" name="type" placeholder="type" style="font-size: 1em;">-->
-                            <select name="type" style="font-size: 1em;" class="input_predict">
-                            <option value="1">NOUN XC90</option>
-                            <option value="2">VERB 95</option>
+                            {% csrf_token %}
+                            <input class="input_predict" name="vocabulary_title" placeholder="vocabulary_title" style="font-size: 2em;">
+                            <select name="type" style="font-size: 1.5em;" class="input_predict">
+                            <option value="1">NOUN</option>
+                            <option value="2">VERB</option>
                             <option value="3">ADJ</option>
                             <option value="4">ADV</option>
                             </select>
-                            <input class="input_predict" name="story" placeholder="story" style="font-size: 1em";>
-                            <input class="input_predict" name="mean" placeholder="mean"style="font-size: 1em;">
-                            <button id="input_predict" type="submit" class="button_1" style="font-size: 1em;">Submit</button>
-<!--                        </form>-->
+                            <input class="input_predict" name="story" placeholder="story" style="font-size: 2em";>
+                            <input class="input_predict" name="mean" placeholder="mean"style="font-size: 2em;">
+                            <button id="input_predict" type="submit" class="button_1" style="font-size: 2em;">Submit</button>
 
-
-
-
-<!--                        <div class="form-group">-->
-<!--                            <div class="col-sm-offset-2 col-sm-10">-->
-<!--                                <button type="submit" class="button_1">Submit</button>-->
-<!--                            </div>-->
-<!--                        </div>-->
                     </form>
                 </div>
             </div>

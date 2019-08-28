@@ -211,7 +211,10 @@ def compare_vocabualry(request, topic_id, type_compare):
                 compare = ran_old.mean
             else:
                 compare = ran_old.vocabulary_title
-            if form.cleaned_data['predict_txt'] == compare:
+            com = form.cleaned_data['predict_txt']
+            if com is not None:
+                com = com.lower()
+            if com == compare.lower():
                 ran_old.rating = (ran_old.num_false + 1) * 100.0 / (ran_old.num_show + 1)
                 ran_old.num_true += 1
                 ran_old.num_show += 1

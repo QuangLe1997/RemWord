@@ -34,9 +34,9 @@
             </ul>
 
             <div class="panel panel-default">
-                <div class="panel-body">
+                <div class="panel-body" style="font-size: 1em;">
 
-                    <h3>All Vocabularys</h3>
+                    <h3 style="font-size: 1em;">All Vocabularys</h3>
 
                     {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
@@ -48,7 +48,6 @@
                             <th>Title</th>
                             <th>Type</th>
                             <th>Mean</th>
-                            <th>Rating</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -58,19 +57,11 @@
                                 <td>{{ vocabulary.vocabulary_title }}</td>
                                 <td>{{vocabulary.type }}</td>
                                 <td>{{vocabulary.mean }}</td>
-                                <td>{{vocabulary.rating }}</td>
                                 <td>
                                     <form action="{% url 'music:delete_vocabulary' topic.id vocabulary.id 0%}" method="post" style="display: inline;">
                                         {% csrf_token %}
                                         <input type="hidden" name="vocabulary_id" value="{{ vocabulary.id }}" />
-                                        <button type="submit" class="btn btn-primary btn-xs">
-                                            <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp; Save
-                                        </button>
-                                    </form>
-                                    <form action="{% url 'music:delete_vocabulary' topic.id vocabulary.id 0%}" method="post" style="display: inline;">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="vocabulary_id" value="{{ vocabulary.id }}" />
-                                        <button type="submit" class="btn btn-danger btn-xs">
+                                        <button type="submit" class="btn btn-danger btn-xs" style="font-size: 1em;">
                                             <span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
                                         </button>
                                     </form>
