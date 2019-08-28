@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 
 from .forms import UserForm, TopicForm, VocabularyForm, PredictForm
-from .models import Topic, Vocabulary
+from .models import Topic, Vocabulary, Example
 
 # AUDIO_FILE_TYPES = ['wav', 'mp3', 'ogg']
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -207,7 +207,7 @@ def compare_vocabualry(request, topic_id, type_compare):
             predict = form.save(commit=False)
             predict.user = request.user
             ran_old = form.cleaned_data['vocabulary']
-            if type_compare == 1:
+            if type_compare == 0:
                 compare = ran_old.mean
             else:
                 compare = ran_old.vocabulary_title
@@ -255,3 +255,17 @@ def update_voca():
 
 def add_example():
     pass
+def create_example(request, vocabulary_id,example):
+    if not request.user.is_authenticated:
+        return render(request, 'music/login.html')
+    form = VocabularyForm(request.POST or None, request.FILES or None)
+    vocabulary = get_object_or_404(Vocabulary, pk=vocabulary_id)
+    if example is not None:
+        new_exam=Example(example_txt=example,vocabulary=vocabulary,user=request.user)
+        new_exam.save()
+        return render(request, 'music/detail.html', {'vocabulary': vocabulary})
+    context = {
+        'vocabulary': vocabulary,
+        'form': form,
+    }
+    return render(request, 'music/create_vocabulary.html', context)
